@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <windows.h>
 #include "functions.h"
 
 int main()
 {
+    char *dir = "data";
+    CreateDirectory(dir, NULL);
 
     system("cls"); // Clears The Screen
 
