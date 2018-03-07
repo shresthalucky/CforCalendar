@@ -2,6 +2,8 @@
 #include "functions.h"
 #include <stdbool.h>
 
+int eDate[100][3], lines=0;
+
 void add()
 {
     addEvent();
@@ -9,17 +11,42 @@ void add()
 
 void search()
 {
-    eventDetail();
-}
+    listDate();
+    printf("%d dates found with events.\n", lines);
 
-int eDate[100][3];
+    if(lines!=0)
+    {
+        for(int i=0; i<lines; i++)
+        {
+            printf("%d %d %d\n", eDate[i][0], eDate[i][1], eDate[i][2]);
+        }
+        printf("\n");
+        eventDetail();
+    }else{
+        printf("Please add event first.");
+    }
+}
 
 void listDate()
 {
     FILE *dateFile;
 
     dateFile = fopen("./data/datefile", "rb");
+
+    if(dateFile==NULL)
+    {
+        return;
+    }
+
     int g = 0;
+    while(!feof(dateFile))
+    {
+        if(fgetc(dateFile)=='\n')
+        {
+            lines++;
+        }
+    }
+    rewind(dateFile);
     while(!feof(dateFile))
     {
         int j=0;
@@ -40,7 +67,7 @@ void listDate()
 bool pin(int y, int m, int d)
 {
     int i;
-    for(i=0; i<100; i++)
+    for(i=0; i<lines; i++)
     {
         if((eDate[i][0] == y) && (eDate[i][1] == m) && (eDate[i][2] == d))
         {

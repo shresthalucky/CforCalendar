@@ -18,9 +18,9 @@ char f[50], y[4], m[2], d[2], fullDate[15];
 void getDateFile()
 {
     char filepath[50] = "./data/";
-    printf("Enter Date (YYYY-MM-DD): ");
+    printf("Enter Date (YYYY MM DD): ");
     fflush(stdin);
-    scanf("%d-%d-%d", &year, &month, &day);
+    scanf("%d %d %d", &year, &month, &day);
     itoa(year, y, 10);
     itoa(month, m, 10);
     itoa(day, d, 10);
