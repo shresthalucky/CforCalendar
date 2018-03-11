@@ -1,8 +1,17 @@
 #include <stdio.h>
-#include "functions.h"
+#include <windows.h>
 #include <stdbool.h>
+#include "functions.h"
+
+HANDLE handle1, handle2;
 
 int eDate[100][3], lines=0;
+
+void locate(int x, int y)
+{
+    COORD p = {x,y};
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), p);
+}
 
 void add()
 {
@@ -22,7 +31,9 @@ void search()
         }
         printf("\n");
         eventDetail();
-    }else{
+    }
+    else
+    {
         printf("Please add event first.");
     }
 }

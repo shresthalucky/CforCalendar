@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
-#define KRED  "\x1B[31m"  //For Color
-#define KGRN  "\x1B[32m"
-#define RESET "\x1B[0m"   //Reset Color
 #include "functions.h"
 
 int year, startspace, month;
@@ -30,10 +27,12 @@ char *months[] =
 void calendar()
 {
     // int year, startspace, month;
-    printf("Input year and month (e.g 2018 01) : \t");
+    locate(10, 5);
+    printf("Input year and month (YYYY MM) : \t");
     scanf("%d %d", &year, &month);
     startspace = StartSpace();
     leapyear();
+    locate(10, 8);
     printCal();
     printf("\n");
 }
