@@ -26,7 +26,6 @@ char *months[] =
 
 void calendar()
 {
-    // int year, startspace, month;
     locate(10, 5);
     printf("Input year and month (YYYY MM) : \t");
     scanf("%d %d", &year, &month);
@@ -54,7 +53,6 @@ int leapyear()
 // To determine the number of spaces to print at beginning of month(Zeller's Algorithm)
 int StartSpace()
 {
-    // int startspace;
     int d1, d2, d3;
     d1 = (year - 1)/4;
     d2 = (year - 1 )/100;
@@ -85,7 +83,6 @@ void printCal()
         startspace = ( startspace + monthDays[i] ) % 7;
     }
 
-    //fseek(stdin,0,SEEK_END); // Clears Input Buffer
     printf("%s %d", months[month], year);
     printf(KGRN "\n\nSun  Mon  Tue  Wed  Thu  Fri  Sat\n" RESET);
 
@@ -125,7 +122,7 @@ void printCal()
         }
     }
 
-//  system("clear");
+    system("clear");
 
     printf("\n\nPress 'q' to quit\nPress 'n' for next month\nPress 'p' for previous month\n");
     scanf("%c", &temp);
