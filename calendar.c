@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 #include <ctype.h>
 #include <time.h>
 #include "functions.h"
@@ -64,7 +65,7 @@ int StartSpace()
 // Prints Calendar
 void printCal()
 {
-
+    system("cls");
     listDate();
 
     char temp;
@@ -95,38 +96,36 @@ void printCal()
     // Prints all the dates for one month
     for (day = 1; day <= monthDays[month]; day++)
     {
-        if((pin(year, month, day))==true)
-        {
+        if((pin(year, month, day))==true){
             printf("*%1d", day);
         }
         else
         {
-            if(year == nowYear && month == nowMonth && day == nowDay)
-            {
+            if(year == nowYear && month == nowMonth && day == nowDay){
+                printf(KYEL "%2d" RESET, day);
+            }
+            else if(!((day + startspace) % 7 > 0)){
                 printf(KRED "%2d" RESET, day);
             }
-            else
-            {
+            else{
                 printf("%2d", day);
             }
         }
 
         // Checks if the previous day is Sat. Else start Sun in new line.
-        if ((day + startspace) % 7 > 0)
-        {
+        if ((day + startspace) % 7 > 0){
             printf("   ");
         }
-        else
-        {
+        else{
             printf("\n ");
         }
     }
-
-    system("clear");
-
-    printf("\n\nPress 'q' to quit\nPress 'n' for next month\nPress 'p' for previous month\n");
-    scanf("%c", &temp);
-    scanf("%c", &temp);
+    do{
+        printf("\n\nPress 'q' to quit\nPress 'n' for next month\nPress 'p' for previous month\n");
+        temp = getch();
+        printf("%d %c", temp, temp);
+        if(temp=='p' || temp=='q' || temp=='n') break;
+    }while(1);
     changeMonth(temp);
 
 }
@@ -176,5 +175,3 @@ void changeMonth(char temp)
         printCal();
     }
 }
-
-

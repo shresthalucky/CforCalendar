@@ -21,39 +21,37 @@ int main()
     strftime(buffer, 80, "%A, %b %d, %Y | %I:%M %p", t); // format current datetime ( Monday, June 15, 2009 | 1:45:30 PM )
     printf("%s\n\n", buffer); // display formatted datetime
 
-    char opt[1];
-    int temp;
+    char opt;
 
     do
     {
         locate(20, 10);
-        printf("[1] View Calendar");
+        printf("[a] View Calendar");
         locate(20, 11);
-        printf("[2] Search Events");
+        printf("[b] Search Events");
         locate(20, 12);
-        printf("[3] Add Events");
+        printf("[c] Add Events");
         locate(20, 13);
-        printf("[4] Exit");
+        printf("[d] Exit");
         locate(20, 15);
         printf("Enter your option : \t");
-        scanf("%s", opt);
-        temp = atoi(opt);   // Converts string into int
+        opt = getch();
         system("cls");
-    }
-    while(temp == 0 || ((temp<=0) || (temp>=5)));    // Asks input until the input is between 0 and 5
+        if(opt >= 'a' || opt <= 'd') break;
+    }while(1);    // Asks input until the input is between 0 and 5
 
-    switch (temp)           //Go to user selected option
+    switch (opt)           //Go to user selected option
     {
-    case 1 :
+    case 'a' :
         calendar();
         break;
-    case 2 :
+    case 'b' :
         search();
         break;
-    case 3 :
+    case 'c' :
         add();
         break;
-    case 4 :
+    case 'd' :
         exit(EXIT_SUCCESS);
     default :
         main();

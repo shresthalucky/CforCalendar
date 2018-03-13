@@ -77,11 +77,18 @@ void addEvent()
         fwrite(&e, sizeof(e), 1, file);
 
         printf("\nEvent successfully saved!\n");
-        printf("Add another event on %s [y/n]?", f);
-        scanf("%c", &check);
+        printf("[a] Main Menu\n[b] Add Another Event\n[c] Quit\nEnter Your Option : ");
+        check = getch();
+        putchar('\n');
+        if(check == 'a'){
+                main();
+        }else if(check == 'c'){
+                exit(EXIT_SUCCESS);
+        }
+        //scanf("%c", &check);
 
     }
-    while(check == 'y');
+    while(check == 'b');
 
     fclose(file);
     getch();
