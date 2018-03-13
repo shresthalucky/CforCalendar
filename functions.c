@@ -21,16 +21,34 @@ void add()
 void search()
 {
     listDate();
-    printf("%d dates found with events.\n", lines);
+    printf("\n\t%d dates found with events.\n\n", lines);
 
     if(lines!=0)
     {
+        char opt;
         for(int i=0; i<lines; i++)
         {
-            printf("%d %d %d\n", eDate[i][0], eDate[i][1], eDate[i][2]);
+            printf("\t%d %d %d\n", eDate[i][0], eDate[i][1], eDate[i][2]);
         }
         printf("\n");
-        eventDetail();
+
+        do{
+            printf("\t[a] View Event\n\t[b] Delete Event\n\n");
+            opt = getch();
+            if(opt=='a' || opt=='b') break;
+        }while(1);
+
+        switch(opt){
+        case 'a':
+            eventDetail();
+            break;
+        case 'b':
+            deleteEvent();
+            break;
+        case 27:
+            main();
+            break;
+        }
     }
     else
     {

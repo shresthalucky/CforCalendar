@@ -25,6 +25,7 @@ void getDateFile();
 void addEvent();
 void eventDetail();
 void listDate();
+void deleteEvent();
 bool pin(int y, int m, int d);
 
 #endif

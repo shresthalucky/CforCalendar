@@ -109,11 +109,20 @@ void eventDetail()
 
     while (fread(&e, sizeof(e), 1, file)==1)
     {
-        printf("\nTime: %s", e.time);
+        printf("\n\nTime: %s", e.time);
         printf("\nLocation: %s", e.location);
         printf("\nNote: %s", e.note);
     }
 
     fclose(file);
     getch();
+}
+
+void deleteEvent(){
+    getDateFile();
+    if(remove(f)==0){
+        printf("\nEvent Deleted!");
+    }else{
+        printf("\nUnable to delete event.");
+    }
 }
