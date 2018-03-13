@@ -121,20 +121,15 @@ void printCal()
         }
     }
     do{
-        printf("\n\nPress 'q' to quit\nPress 'n' for next month\nPress 'p' for previous month\n");
+        printf("\n\n[P] Previous Month\n[n] Next Month\n[esc] Back\n[q] sQuit\n");
         temp = getch();
-        printf("%d %c", temp, temp);
-        if(temp=='p' || temp=='q' || temp=='n') break;
+        if(temp=='p' || temp=='q' || temp=='n' || temp == 27) break;
     }while(1);
     changeMonth(temp);
 
 }
 
-void changeMonth(char temp)
-{
-
-    printf("You selected %c", temp);
-
+void changeMonth(char temp){
     switch (temp)
     {
     case ('q') :
@@ -170,6 +165,9 @@ void changeMonth(char temp)
             StartSpace();
             printCal();
         }
+        break;
+    case 27 :
+        main();
         break;
     default :
         printCal();
