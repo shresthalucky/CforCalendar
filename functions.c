@@ -32,17 +32,24 @@ void search()
         }
         printf("\n");
 
-        do{
-            printf("\t[a] View Event\n\t[b] Delete Event\n\n");
+        do
+        {
+            printf("\t[a] View Event\n\t[b] Edit Event\n\t[c] Delete Event\n\n");
             opt = getch();
-            if(opt=='a' || opt=='b') break;
-        }while(1);
+            if(opt=='a' || opt=='b')
+                break;
+        }
+        while(1);
 
-        switch(opt){
+        switch(opt)
+        {
         case 'a':
             eventDetail();
             break;
         case 'b':
+            editEvent();
+            break;
+        case 'c':
             deleteEvent();
             break;
         case 27:

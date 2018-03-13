@@ -35,8 +35,6 @@ void getDateFile()
 
 void addEvent()
 {
-
-    char check;
     getDateFile();
 
 //  printf("Saved to %s\n", f);
@@ -58,6 +56,15 @@ void addEvent()
     fprintf(dateFile, "%d %d %d\n", year, month, day);
     fclose(dateFile);
 
+    writeEvent();
+
+    fclose(file);
+    getch();
+}
+
+void writeEvent()
+{
+    char check;
     do
     {
         check = 'n';
@@ -80,18 +87,18 @@ void addEvent()
         printf("[a] Main Menu\n[b] Add Another Event\n[c] Quit\nEnter Your Option : ");
         check = getch();
         putchar('\n');
-        if(check == 'a'){
-                main();
-        }else if(check == 'c'){
-                exit(EXIT_SUCCESS);
+        if(check == 'a')
+        {
+            main();
+        }
+        else if(check == 'c')
+        {
+            exit(EXIT_SUCCESS);
         }
         //scanf("%c", &check);
 
     }
     while(check == 'b');
-
-    fclose(file);
-    getch();
 }
 
 
@@ -118,11 +125,27 @@ void eventDetail()
     getch();
 }
 
-void deleteEvent(){
+void editEvent()
+{
     getDateFile();
-    if(remove(f)==0){
+    file = fopen(f, "wb");
+    if(file==NULL){
+        printf("No date found.");
+    }
+
+    writeEvent();
+
+}
+
+void deleteEvent()
+{
+    getDateFile();
+    if(remove(f)==0)
+    {
         printf("\nEvent Deleted!");
-    }else{
+    }
+    else
+    {
         printf("\nUnable to delete event.");
     }
 }

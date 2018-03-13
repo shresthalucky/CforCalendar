@@ -23,8 +23,10 @@ void changeMonth(char temp);
 
 void getDateFile();
 void addEvent();
+void writeEvent();
 void eventDetail();
 void listDate();
+void editEvent();
 void deleteEvent();
 bool pin(int y, int m, int d);
 
