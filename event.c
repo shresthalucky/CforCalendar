@@ -19,16 +19,13 @@ char f[50], y[4], m[2], d[2], fullDate[15];
 void getDateFile()
 {
     char filepath[50] = "./data/";
-    printf("Enter Date (YYYY MM DD): ");
+    printf("\tEnter Date (YYYY MM DD): ");
     fflush(stdin);
     scanf("%d %d %d", &year, &month, &day);
     // Convert int to string
     itoa(year, y, 10);
     itoa(month, m, 10);
     itoa(day, d, 10);
-
-//  strcat(fullDate, strcat(y, strcat(m, d)));
-//  strcat(f, strcat(filepath, fullDate));
 
     strcat(f, strcat(filepath, strcat(fullDate, strcat(y, strcat(m, d)))));
 }
@@ -104,25 +101,42 @@ void writeEvent()
 
 void eventDetail()
 {
-
+    char op;
     getDateFile();
 
     file = fopen(f, "rb");
 
     if(file==NULL)
     {
-        printf("No events found on %s", fullDate);
+        printf("\tNo events found on %s", fullDate);
     }
 
     while (fread(&e, sizeof(e), 1, file)==1)
     {
-        printf("\n\nTime: %s", e.time);
-        printf("\nLocation: %s", e.location);
-        printf("\nNote: %s", e.note);
+        printf("\n\n\tTime: %s", e.time);
+        printf("\tLocation: %s", e.location);
+        printf("\tNote: %s", e.note);
     }
 
+    do{
+        printf("\n\t[q]Quit");
+        op = getch();
+        if(op == 27 || op == 'a' || op == 'q') break;
+    }while(1);
+
+    switch(op){
+        case 27 :
+            system("cls");
+            main();
+        break;
+        case 'a' :
+            system("cls");
+            eventDetail();
+        break;
+        case 'q':
+            exit(EXIT_SUCCESS);
+    }
     fclose(file);
-    getch();
 }
 
 void editEvent()
@@ -137,8 +151,8 @@ void editEvent()
 
 }
 
-void deleteEvent()
-{
+void deleteEvent(){
+    char op;
     getDateFile();
     if(remove(f)==0)
     {
@@ -147,5 +161,18 @@ void deleteEvent()
     else
     {
         printf("\nUnable to delete event.");
+    }
+    do{
+        printf("\n\t[esc] Main Menu\n\t[q] Quit");
+        op = getch();
+        if(op==27 || op=='q') break;
+    }while(1);
+
+    switch(op){
+        case 27 :
+            main();
+        break;
+        case 'q':
+            exit(EXIT_SUCCESS);
     }
 }

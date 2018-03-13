@@ -97,7 +97,7 @@ void printCal()
     for (day = 1; day <= monthDays[month]; day++)
     {
         if((pin(year, month, day))==true){
-            printf("*%1d", day);
+            printf(KMAG "%2d" RESET, day);
         }
         else
         {

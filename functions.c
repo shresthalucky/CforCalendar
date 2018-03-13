@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <conio.h>
 #include <windows.h>
 #include <stdbool.h>
 #include "functions.h"
@@ -36,10 +37,12 @@ void search()
         {
             printf("\t[a] View Event\n\t[b] Edit Event\n\t[c] Delete Event\n\n");
             opt = getch();
-            if(opt=='a' || opt=='b')
+            if(opt=='a' || opt=='b' || opt=='c')
                 break;
         }
         while(1);
+
+        system("cls");
 
         switch(opt)
         {
@@ -89,12 +92,6 @@ void listDate()
         fscanf(dateFile, "%d %d %d\n", &eDate[g][j], &eDate[g][j+1], &eDate[g][j+2]);
         g++;
     }
-
-//  for (int k = 0; k < 10; k++) {
-//	for (int i = 0; i < 3; i++) {
-//	  printf("%d ", eDate[k][i]);
-//	}printf("\n");
-//  }
 
     fclose(dateFile);
 }
