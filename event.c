@@ -3,8 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-struct event
-{
+struct event{
     char time[6];
     char location[20];
     char note[100];
@@ -16,8 +15,7 @@ int day, month, year;
 char f[50], y[4], m[2], d[2], fullDate[15];
 
 // Compares the dates with events to highlight dates
-void getDateFile()
-{
+void getDateFile(){
     char filepath[50] = "./data/";
     printf("\tEnter Date (YYYY MM DD): ");
     fflush(stdin);
@@ -27,26 +25,23 @@ void getDateFile()
     itoa(month, m, 10);
     itoa(day, d, 10);
 
-    strcat(f, strcat(filepath, strcat(fullDate, strcat(y, strcat(m, d)))));
+    strcpy(f, strcat(filepath, strcpy(fullDate, strcat(y, strcat(m, d)))));
 }
 
-void addEvent()
-{
+void addEvent(){
     getDateFile();
 
 //  printf("Saved to %s\n", f);
 
     file = fopen(f, "ab");
 
-    if(file==NULL)
-    {
+    if(file==NULL){
         file = fopen(f, "wb");
     }
 
     dateFile = fopen("./data/datefile", "ab");
 
-    if(dateFile == NULL)
-    {
+    if(dateFile == NULL){
         dateFile = fopen("./data/datefile", "wb");
     }
 
@@ -59,11 +54,9 @@ void addEvent()
     getch();
 }
 
-void writeEvent()
-{
+void writeEvent(){
     char check;
-    do
-    {
+    do{
         check = 'n';
 
         fflush(stdin);
@@ -84,12 +77,10 @@ void writeEvent()
         printf("[a] Main Menu\n[b] Add Another Event\n[c] Quit\nEnter Your Option : ");
         check = getch();
         putchar('\n');
-        if(check == 'a')
-        {
+        if(check == 'a'){
             main();
         }
-        else if(check == 'c')
-        {
+        else if(check == 'c'){
             exit(EXIT_SUCCESS);
         }
         //scanf("%c", &check);
@@ -99,29 +90,26 @@ void writeEvent()
 }
 
 
-void eventDetail()
-{
+void eventDetail(){
     char op;
     getDateFile();
 
     file = fopen(f, "rb");
 
-    if(file==NULL)
-    {
+    if(file==NULL){
         printf("\tNo events found on %s", fullDate);
     }
 
-    while (fread(&e, sizeof(e), 1, file)==1)
-    {
+    while (fread(&e, sizeof(e), 1, file)==1){
         printf("\n\n\tTime: %s", e.time);
-        printf("\tLocation: %s", e.location);
+        printf("\n\tLocation: %s", e.location);
         printf("\tNote: %s", e.note);
     }
 
     do{
-        printf("\n\t[q]Quit");
+        printf("\n\t[esc] Menu\n\t[q] Quit");
         op = getch();
-        if(op == 27 || op == 'a' || op == 'q') break;
+        if(op == 27 || op == 'q') break;
     }while(1);
 
     switch(op){
@@ -129,18 +117,17 @@ void eventDetail()
             system("cls");
             main();
         break;
-        case 'a' :
+        /*case 'a' :
             system("cls");
             eventDetail();
-        break;
+        break;*/
         case 'q':
             exit(EXIT_SUCCESS);
     }
     fclose(file);
 }
 
-void editEvent()
-{
+void editEvent(){
     getDateFile();
     file = fopen(f, "wb");
     if(file==NULL){
@@ -154,12 +141,10 @@ void editEvent()
 void deleteEvent(){
     char op;
     getDateFile();
-    if(remove(f)==0)
-    {
+    if(remove(f)==0){
         printf("\nEvent Deleted!");
     }
-    else
-    {
+    else{
         printf("\nUnable to delete event.");
     }
     do{

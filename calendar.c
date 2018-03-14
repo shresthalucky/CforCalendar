@@ -25,8 +25,7 @@ char *months[] =
     "\n\t  December"
 };
 
-void calendar()
-{
+void calendar(){
     locate(10, 5);
     printf("Input year and month (YYYY MM) : \t");
     scanf("%d %d", &year, &month);
@@ -38,22 +37,18 @@ void calendar()
 }
 
 //To Check The Leap Year
-int leapyear()
-{
-    if ((year%4 == 0 && year%100 != 0) || year%100 == 0)
-    {
+int leapyear(){
+    if ((year%4 == 0 && year%100 != 0) || year%100 == 0){
         monthDays[2] = 29;
     }
-    else
-    {
+    else{
         monthDays[2] = 28;
     }
     return (((year % 4 == 0 ) && (year % 100 != 0))) || (year % 400 == 0);
 }
 
 // To determine the number of spaces to print at beginning of month(Zeller's Algorithm)
-int StartSpace()
-{
+int StartSpace(){
     int d1, d2, d3;
     d1 = (year - 1)/4;
     d2 = (year - 1 )/100;
@@ -63,8 +58,7 @@ int StartSpace()
 }
 
 // Prints Calendar
-void printCal()
-{
+void printCal(){
     system("cls");
     listDate();
 
@@ -79,8 +73,7 @@ void printCal()
     int nowDay = t->tm_mday;
 
     int day,i;
-    for (i=1; i<month; i++)
-    {
+    for (i=1; i<month; i++){
         startspace = ( startspace + monthDays[i] ) % 7;
     }
 
@@ -88,19 +81,17 @@ void printCal()
     printf(KGRN "\n\nSun  Mon  Tue  Wed  Thu  Fri  Sat\n" RESET);
 
     // To Correct the position for the first date
-    for (day = 1; day <= 1 + startspace * 5; day++)
-    {
+    for (day = 1; day <= 1 + startspace * 5; day++){
         printf(" ");
     }
 
     // Prints all the dates for one month
-    for (day = 1; day <= monthDays[month]; day++)
-    {
+    for (day = 1; day <= monthDays[month]; day++){
+
         if((pin(year, month, day))==true){
             printf(KMAG "%2d" RESET, day);
         }
-        else
-        {
+        else{
             if(year == nowYear && month == nowMonth && day == nowDay){
                 printf(KYEL "%2d" RESET, day);
             }
@@ -121,51 +112,50 @@ void printCal()
         }
     }
     do{
-        printf("\n\n[P] Previous Month\n[n] Next Month\n[esc] Back\n[q] sQuit\n");
+        printf("\n\n [p]\tPrevious Month\n [n]\tNext Month\n[esc]\tBack\n [j]\tJump to month\n [q]\tQuit\n");
         temp = getch();
-        if(temp=='p' || temp=='q' || temp=='n' || temp == 27) break;
+        if(temp=='p' || temp=='q' || temp=='n' || temp == 'j' || temp == 27) break;
     }while(1);
     changeMonth(temp);
 
 }
 
 void changeMonth(char temp){
-    switch (temp)
-    {
+    switch (temp){
     case ('q') :
         exit(EXIT_SUCCESS);
     case ('n') :
         month += 1;
-        if (month > 12)
-        {
+        if (month > 12){
             year += 1;
             month = 1;
             leapyear();
             StartSpace();
             printCal();
         }
-        else
-        {
+        else{
             StartSpace();
             printCal();
         }
         break;
     case ('p') :
         month -= 1;
-        if (month < 1)
-        {
+        if (month < 1){
             year -= 1;
             month = 12;
             leapyear();
             StartSpace();
             printCal();
         }
-        else
-        {
+        else{
             StartSpace();
             printCal();
         }
         break;
+    case 'j':
+        system("cls");
+        calendar();
+    break;
     case 27 :
         main();
         break;

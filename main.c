@@ -23,8 +23,7 @@ int main()
 
     char opt;
 
-    do
-    {
+    do{
         locate(20, 10);
         printf("[a] View Calendar");
         locate(20, 11);
@@ -35,26 +34,25 @@ int main()
         printf("[d] Exit");
         locate(20, 15);
         printf("Enter your option : \t");
-        opt = getch();
+        opt = _getch();
         system("cls");
         if(opt >= 'a' || opt <= 'd') break;
     }while(1);    // Asks input until the input is between 0 and 5
 
-    switch (opt)           //Go to user selected option
-    {
-    case 'a' :
-        calendar();
-        break;
-    case 'b' :
-        search();
-        break;
-    case 'c' :
-        add();
-        break;
-    case 'd' :
-        exit(EXIT_SUCCESS);
-    default :
-        main();
+    switch (opt){           //Go to user selected option
+        case 'a' :
+            calendar();
+            break;
+        case 'b' :
+            search();
+            break;
+        case 'c' :
+            add();
+            break;
+        case 'd' :
+            exit(EXIT_SUCCESS);
+        default :
+            main();
     }
     return 0;
 }
