@@ -74,10 +74,10 @@ void writeEvent(){
         fwrite(&e, sizeof(e), 1, file);
 
         printf("\nEvent successfully saved!\n");
-        printf("[a] Main Menu\n[b] Add Another Event\n[c] Quit\nEnter Your Option : ");
+        printf("[esc] Main Menu\n[b] Add Another Event\n[c] Quit\nEnter Your Option : ");
         check = getch();
         putchar('\n');
-        if(check == 'a'){
+        if(check == 27){
             main();
         }
         else if(check == 'c'){
